@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<section class="editor-wrap">
+    <a class="back-link" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+    <p class="eyebrow">YOUR NEXT IDEA</p>
+    <h1>{{ page_title }}</h1>
+    <form method="POST" class="form-stack editor-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Post title<input name="title" required maxlength="160" value="{{ post.title if post else '' }}" placeholder="Give your story a title"></label>
+        <label>Your story<textarea name="content" required rows="14" placeholder="Start writing...">{{ post.content if post else '' }}</textarea></label>
+        <div class="form-footer"><span class="muted">Be clear, be kind, and make it yours.</span><button class="button" type="submit">{{ 'Save changes' if post else 'Publish post' }}</button></div>
+    </form>
+</section>
+{% endblock %}
